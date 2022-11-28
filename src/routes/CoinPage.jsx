@@ -15,119 +15,131 @@ const CoinPage = () => {
       console.log(res.data);
     });
   }, [url]);
+
   return (
-    <div>
-      <div>
-        <img src={coin.image?.large} alt="/" />
+    <div className="rounded-div my-12 py-8">
+      <div className="flex py-8">
+        <img className="w-20 mr-8" src={coin.image?.large} alt="/" />
         <div>
-          <p>{coin?.name} price</p>
+          <p className="text-3xl font-bold">{coin?.name} price</p>
           <p>({coin.symbol?.toUpperCase()}/USD)</p>
         </div>
       </div>
-
-      <div>
+      {/* this is grid */}
+      {/* left side */}
+      <div className="grid md:grid-cols-2 gap-8">
         <div>
-          <div>
+          <div className="flex justify-between">
             {coin.market_data?.current_price ? (
-              <p>${coin.market_data.current_price.usd.toLocaleString()}</p>
+              <p className="text-3xl font-bold">
+                ${coin.market_data.current_price.usd.toLocaleString()}
+              </p>
             ) : null}
             <p>7 Day</p>
           </div>
+          {/* sparklinge */}
           <div>
             <Sparklines data={coin.market_data?.sparkline_7d.price}>
               <SparklinesLine color="teal" />
             </Sparklines>
           </div>
-
-          <div>
+          {/* sparkline end */}
+          {/* second row */}
+          <div className="flex justify-between py-4">
             <div>
-              <p>Market Cap</p>
+              <p className="text-gray-500 text-sm">Market Cap</p>
               {coin.market_data?.market_cap ? (
                 <p>${coin.market_data.market_cap.usd.toLocaleString()}</p>
               ) : null}
             </div>
 
             <div>
-              <p>Volume (24h)</p>
+              <p className="text-gray-500 text-sm">Volume (24h)</p>
               {coin.market_data?.total_volume ? (
                 <p>${coin.market_data.total_volume.usd.toLocaleString()}</p>
               ) : null}
             </div>
           </div>
-
-          <div>
+          {/* Thrid row */}
+          <div className="flex justify-between py-4">
             <div>
-              <p>24h High</p>
+              <p className="text-gray-500 text-sm">24h High</p>
               {coin.market_data?.high_24h ? (
                 <p>${coin.market_data.high_24h.usd.toLocaleString()}</p>
               ) : null}
             </div>
             <div>
-              <p>24h Low</p>
+              <p className="text-gray-500 text-sm">24h Low</p>
               {coin.market_data?.low_24h ? (
                 <p>${coin.market_data.low_24h.usd.toLocaleString()}</p>
               ) : null}
             </div>
           </div>
         </div>
+        {/* Done left side, start right side render */}
+        {/* first row */}
         <div>
-          <p>Market Stats</p>
-          <div>
+          <p className="text-xl font-bold">Market Stats</p>
+          <div className="flex justify-between py-4">
             <div>
-              <p>Market Rank</p>
+              <p className="text-gray-500 text-sm">Market Rank</p>
               {coin.market_cap_rank}
             </div>
             <div>
-              <p>Hashing Algorithm</p>
+              <p className="text-gray-500 text-sm">Hashing Algorithm</p>
               {coin.hashing_algorithm ? <p>{coin.hashing_algorithm}</p> : null}
             </div>
             <div>
-              <p>Trust Score</p>
+              <p className="text-gray-500 text-sm">Trust Score</p>
               {coin.tickers ? <p>{coin.liquidity_score.toFixed(2)}</p> : null}
             </div>
           </div>
 
-          <div>
+          {/* second row in right */}
+          <div className="flex justify-between py-4">
             <div>
-              <p>Price Change (24h)</p>
+              <p className="text-gray-500 text-sm">Price Change (24h)</p>
               {coin.market_data ? (
                 <p>{coin.market_data.price_change_percentage_24h.toFixed(2)}</p>
               ) : null}
             </div>
             <div>
-              <p>Price Change (7d)</p>
+              <p className="text-gray-500 text-sm">Price Change (7d)</p>
               {coin.market_data ? (
                 <p>{coin.market_data.price_change_percentage_7d.toFixed(2)}</p>
               ) : null}
             </div>
             <div>
-              <p>Price Change (14d)</p>
+              <p className="text-gray-500 text-sm">Price Change (14d)</p>
               {coin.market_data ? (
                 <p>{coin.market_data.price_change_percentage_14d.toFixed(2)}</p>
               ) : null}
             </div>
           </div>
-          <div>
+
+          {/* third row in right */}
+          <div className="flex justify-between py-4">
             <div>
-              <p>Price change (30d)</p>
+              <p className="text-gray-500 text-sm">Price change (30d)</p>
               {coin.market_data ? (
                 <p>{coin.market_data.price_change_percentage_30d.toFixed(2)}</p>
               ) : null}
             </div>
             <div>
-              <p>Price change (60d)</p>
+              <p className="text-gray-500 text-sm">Price change (60d)</p>
               {coin.market_data ? (
                 <p>{coin.market_data.price_change_percentage_60d.toFixed(2)}</p>
               ) : null}
             </div>
             <div>
-              <p>Price change (1y)</p>
+              <p className="text-gray-500 text-sm">Price change (1y)</p>
               {coin.market_data ? (
                 <p>{coin.market_data.price_change_percentage_1y.toFixed(2)}</p>
               ) : null}
             </div>
           </div>
-          <div>
+          {/* icon render */}
+          <div className="flex justify-around p-8 text-accent">
             <FaTwitter />
             <FaFacebook />
             <FaReddit />
@@ -136,8 +148,8 @@ const CoinPage = () => {
         </div>
       </div>
       {/* Description */}
-      <div>
-        <p>About {coin.name}</p>
+      <div className="py-4">
+        <p className="text-xl font-bold">About {coin.name}</p>
         <p
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(
