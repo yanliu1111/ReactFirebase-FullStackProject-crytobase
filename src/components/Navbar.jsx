@@ -56,6 +56,7 @@ const Navbar = () => {
       <div onClick={handleNav} className="block md:hidden cursor-pointer z-10">
         {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
       </div>
+
       {/* mobile menu */}
       <div
         className={
@@ -69,7 +70,7 @@ const Navbar = () => {
             <Link to="/">Home</Link>
           </li>
           <li onClick={handleNav} className="border-b py-6">
-            <Link to="/">Account</Link>
+            <Link to="/account">Account</Link>
           </li>
           <li className=" py-6">
             <ThemeToggle />
