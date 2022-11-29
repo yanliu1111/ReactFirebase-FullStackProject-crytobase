@@ -10,10 +10,10 @@ const SaveCoin = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    onSnapshot(doc(db, "users", `${user.email}`), (doc) => {
+    onSnapshot(doc(db, "users", `${user?.email}`), (doc) => {
       setCoins(doc.data()?.watchList);
     });
-  }, [user.email]);
+  }, [user?.email]);
 
   const coinPath = doc(db, "users", `${user?.email}`);
   const deleteCoin = async (passedid) => {
