@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { useAuth } from "../context/AuthContext";
 
 const SaveCoin = () => {
   const [coins, setCoins] = useState([]);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    onSnapshot(doc(db, "users", `${user.email}`), (doc) => {
+      setCoins(doc.data()?.watchList);
+    });
+  }, [user.email]);
+
+  const coinPath = doc(db, "users", `${user?.email}`);
+
   return (
     <div>
-      {coins.length === 0 ? (
+      {coins?.length === 0 ? (
         <p>
           You don't have any coins saved. Please save a coin to add it to your
           watch list.<Link to="/">Click here to search coins.</Link>
@@ -21,7 +34,7 @@ const SaveCoin = () => {
             </tr>
           </thead>
           <tbody>
-            {coins.map((coin) => (
+            {coins?.map((coin) => (
               <tr key={coin.id} className="h-[60px] overflow-hidden">
                 <td>{coin?.rank}</td>
                 <td>
@@ -31,7 +44,7 @@ const SaveCoin = () => {
                       <div>
                         <p className="hidden sm:table-cell">{coin?.name}</p>
                         <p className="text-gray-500 text-left text-sm">
-                          {coin?.symbol.toUpperCase}
+                          {coin?.symbol.toUpperCase()}
                         </p>
                       </div>
                     </div>
