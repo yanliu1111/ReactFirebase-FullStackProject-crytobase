@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Sparklines, SparklinesLine } from "react-sparklines";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -31,7 +31,11 @@ const CoinItem = ({ coin }) => {
   return (
     <tr className="h-[80px] boder-b overflow-hidden">
       <td onClick={saveCoin}>
-        {savedCoin ? <AiFillHeart /> : <AiOutlineHeart />}
+        {savedCoin ? (
+          <FaHeart style={{ color: "red", fontSize: "20px" }} />
+        ) : (
+          <FaRegHeart style={{ color: "green", fontSize: "20px" }} />
+        )}
       </td>
       <td>{coin.market_cap_rank}</td>
       <td>
